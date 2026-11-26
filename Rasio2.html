@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belajar Rasio - Matematika Kelas 7</title>
+<style>
+:root{--bg:#fff;--tx:#111;--side:#0b2a5b;--ac:#ffd400;--a:#c1121f;--b:#0057b8;--ok:#e8f5e9;--bd:#0b2a5b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.6;color:var(--tx);background:var(--bg);display:flex;min-height:100vh}
+nav{width:240px;background:var(--side);padding:16px 12px;position:sticky;top:0;height:100vh;flex-shrink:0}
+nav h2{color:#fff;font-size:22px;margin:0 0 12px}
+nav button{display:block;width:100%;text-align:left;font-size:20px;font-weight:bold;color:#fff;background:transparent;border:3px solid transparent;border-radius:12px;padding:12px;margin-bottom:6px;cursor:pointer}
+nav button[aria-current="true"]{background:var(--ac);color:#000}
+nav button:focus-visible,.btn:focus-visible,input:focus-visible{outline:4px solid #ff6d00;outline-offset:2px}
+main{flex:1;padding:24px;max-width:860px}
+section{display:none}
+section.on{display:block}
+h1{font-size:30px;margin-top:0;color:var(--side)}
+h2.t{font-size:26px;color:var(--side);margin-top:0}
+.card{border:3px solid var(--bd);border-radius:16px;padding:16px;margin:14px 0;background:#fff}
+.btn{font-size:20px;font-weight:bold;background:var(--side);color:#fff;border:0;border-radius:12px;padding:12px 20px;margin:6px 6px 6px 0;cursor:pointer;min-height:48px}
+.btn.alt{background:var(--ac);color:#000}
+.btn:disabled{background:#555;color:#fff;opacity:.6;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;align-items:center}
+.lab{font-weight:bold;min-width:70px}
+.blk{width:34px;height:34px;border-radius:6px;border:2px solid #000;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:16px}
+.A{background:var(--a)}.B{background:var(--b)}
+.big{font-size:28px;font-weight:bold;color:var(--side)}
+.ans{display:none;background:var(--ok);border-left:8px solid #1b5e20;padding:12px;border-radius:8px;margin-top:10px}
+.ans.on{display:block}
+input[type=range]{width:100%;height:36px;accent-color:var(--side)}
+.step{font-size:18px;font-weight:bold;color:#444}
+ul{padding-left:24px}
+li{margin-bottom:8px}
+@media(max-width:700px){
+ body{display:block;font-size:19px}
+ nav{width:100%;height:auto;position:sticky;z-index:5;padding:8px;display:flex;gap:6px;overflow-x:auto}
+ nav h2{display:none}
+ nav button{width:auto;white-space:nowrap;margin:0;padding:10px 14px}
+ main{padding:16px}
+ .blk{width:30px;height:30px}
+}
+</style>
+</head>
+<body>
+<nav aria-label="Menu">
+ <h2>📘 Menu</h2>
+ <button data-s="s1">1. Tujuan</button>
+ <button data-s="s2">2. Pemantik</button>
+ <button data-s="s3">3. Penjelasan</button>
+ <button data-s="s4">4. Coba Sendiri</button>
+ <button data-s="s5">5. Contoh Soal</button>
+ <button data-s="s6">6. Rangkuman</button>
+</nav>
+<main>
+
+<section id="s1">
+ <h1>Rasio: Membandingkan Dua Hal</h1>
+ <p>Matematika Kelas 7 MTs</p>
+ <div class="card">
+  <h2 class="t">Tujuan Belajar</h2>
+  <p>Setelah belajar, kamu bisa:</p>
+  <ul>
+   <li>Menjelaskan arti rasio.</li>
+   <li>Menulis rasio dalam bentuk a : b.</li>
+   <li>Menyederhanakan rasio.</li>
+   <li>Mencari rasio senilai.</li>
+   <li>Menyelesaikan soal cerita tentang rasio.</li>
+  </ul>
+ </div>
+ <button class="btn alt" onclick="go('s2')">Mulai ▶</button>
+</section>
+
+<section id="s2">
+ <h2 class="t">Pertanyaan Pemantik</h2>
+ <div class="card">
+  <p>Kamu membuat es teh. Untuk 1 gelas, kamu pakai 2 sendok gula.</p>
+  <p class="big">Untuk 3 gelas, berapa sendok gula agar rasanya sama?</p>
+  <p>Coba pikirkan dulu. Lalu tekan tombol.</p>
+  <button class="btn" onclick="tog('a2')">Lihat jawaban</button>
+  <div class="ans" id="a2">
+   <p>Gula : gelas = 2 : 1.</p>
+   <p>Untuk 3 gelas, kalikan 3. Gula = 6 sendok.</p>
+   <p>Rasa tetap sama karena <b>perbandingannya sama</b>. Itulah rasio!</p>
+  </div>
+ </div>
+ <button class="btn alt" onclick="go('s3')">Lanjut belajar ▶</button>
+</section>
+
+<section id="s3">
+ <h2 class="t">Penjelasan Bertahap</h2>
+ <div class="card">
+  <div class="step" id="stp"></div>
+  <div id="stbody"></div>
+ </div>
+ <button class="btn" id="prev" onclick="stepMove(-1)">◀ Kembali</button>
+ <button class="btn alt" id="next" onclick="stepMove(1)">Lanjut ▶</button>
+</section>
+
+<section id="s4">
+ <h2 class="t">Coba Sendiri: Sirup dan Air</h2>
+ <p>Geser slider. Lihat rasionya berubah.</p>
+ <div class="card">
+  <label for="rs"><b>Sirup: <span id="vs">2</span> gelas kecil</b></label>
+  <input type="range" id="rs" min="1" max="12" value="2">
+  <label for="ra"><b>Air: <span id="va">4</span> gelas kecil</b></label>
+  <input type="range" id="ra" min="1" max="12" value="4">
+  <div class="row"><span class="lab">Sirup</span><span id="rowS"></span></div>
+  <div class="row"><span class="lab">Air</span><span id="rowA"></span></div>
+  <p class="big" id="out1"></p>
+  <p id="out2"></p>
+  <p id="out3"></p>
+  <button class="btn" onclick="simp()">Sederhanakan</button>
+  <button class="btn" onclick="dbl()">Gandakan ×2</button>
+ </div>
+</section>
+
+<section id="s5">
+ <h2 class="t">Tiga Contoh Soal</h2>
+
+ <div class="card">
+  <h3>Soal 1: Menulis Rasio</h3>
+  <p>Di kelas 7A ada 12 siswa putri dan 18 siswa putra. Berapa rasio putri : putra, dalam bentuk paling sederhana?</p>
+  <button class="btn" onclick="tog('p1')">Lihat pembahasan</button>
+  <div class="ans" id="p1">
+   <p><b>Langkah 1.</b> Tulis rasio: 12 : 18.</p>
+   <p><b>Langkah 2.</b> Cari bilangan yang membagi keduanya. FPB 12 dan 18 adalah 6.</p>
+   <p><b>Langkah 3.</b> 12 ÷ 6 = 2 dan 18 ÷ 6 = 3.</p>
+   <p><b>Jawab:</b> putri : putra = 2 : 3.</p>
+   <div class="row" id="d1"></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>Soal 2: Rasio Senilai</h3>
+  <p>Susu : cokelat = 3 : 2. Ibu memakai 9 sendok susu. Berapa sendok cokelat?</p>
+  <button class="btn" onclick="tog('p2')">Lihat pembahasan</button>
+  <div class="ans" id="p2">
+   <p><b>Langkah 1.</b> Susu 3 menjadi 9. Berarti dikali 3.</p>
+   <p><b>Langkah 2.</b> Cokelat juga dikali 3. 2 × 3 = 6.</p>
+   <p><b>Jawab:</b> 6 sendok cokelat.</p>
+   <div class="row" id="d2"></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>Soal 3: Membagi Menurut Rasio</h3>
+  <p>Uang Rani : uang Dika = 2 : 3. Jumlah uang mereka Rp25.000. Berapa uang Rani dan Dika?</p>
+  <button class="btn" onclick="tog('p3')">Lihat pembahasan</button>
+  <div class="ans" id="p3">
+   <p><b>Langkah 1.</b> Jumlah bagian: 2 + 3 = 5 bagian.</p>
+   <p><b>Langkah 2.</b> Satu bagian: 25.000 ÷ 5 = Rp5.000.</p>
+   <p><b>Langkah 3.</b> Rani: 2 × 5.000 = Rp10.000. Dika: 3 × 5.000 = Rp15.000.</p>
+   <p><b>Cek:</b> 10.000 + 15.000 = 25.000. Benar!</p>
+   <div class="row" id="d3"></div>
+  </div>
+ </div>
+</section>
+
+<section id="s6">
+ <h2 class="t">Rangkuman</h2>
+ <div class="card">
+  <ul>
+   <li><b>Rasio</b> adalah perbandingan dua bilangan.</li>
+   <li>Ditulis a : b. Urutan tidak boleh tertukar.</li>
+   <li><b>Sederhanakan</b> dengan membagi kedua bilangan dengan FPB.</li>
+   <li><b>Rasio senilai</b>: kalikan atau bagi kedua bilangan dengan bilangan yang sama.</li>
+   <li><b>Membagi menurut rasio</b>: jumlah bagian, cari satu bagian, lalu kalikan.</li>
+  </ul>
+  <p class="big">Hebat! Kamu sudah paham rasio. 🎉</p>
+ </div>
+ <button class="btn alt" onclick="go('s1')">Ulangi dari awal</button>
+</section>
+
+</main>
+<script>
+function $(i){return document.getElementById(i)}
+function bl(n,c,t){var h="";for(var i=0;i<n;i++)h+='<span class="blk '+c+'">'+(t||"")+'</span>';return h}
+function gcd(a,b){return b?gcd(b,a%b):a}
+function go(id){
+ document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id===id)});
+ document.querySelectorAll("nav button").forEach(function(b){b.setAttribute("aria-current",b.dataset.s===id?"true":"false")});
+ window.scrollTo(0,0);
+}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){go(b.dataset.s)}});
+function tog(id){$(id).classList.toggle("on")}
+
+/* Penjelasan bertahap */
+var steps=[
+ {t:"Apa itu rasio?",h:function(){return '<p>Rasio membandingkan dua jumlah.</p><p>Lihat kotak merah dan biru ini:</p><div class="row">'+bl(2,"A")+bl(3,"B")+'</div><p>Ada 2 merah dan 3 biru.</p><p class="big">Merah : Biru = 2 : 3</p>'}},
+ {t:"Cara menulis rasio",h:function(){return '<p>Tulis dengan tanda titik dua ( : ).</p><p>Bisa juga seperti pecahan: 2/3.</p><p class="big">Urutan penting!</p><div class="row"><span class="lab">Merah</span>'+bl(2,"A")+'</div><div class="row"><span class="lab">Biru</span>'+bl(3,"B")+'</div><p>Biru : Merah = 3 : 2. Itu <b>berbeda</b> dari 2 : 3.</p>'}},
+ {t:"Menyederhanakan rasio",h:function(){return '<p>Rasio 4 : 6. Bagi kedua angka dengan 2.</p><div class="row">'+bl(4,"A")+'</div><div class="row">'+bl(6,"B")+'</div><p>Kelompokkan tiap 2 kotak:</p><div class="row">'+bl(2,"A")+'</div><div class="row">'+bl(3,"B")+'</div><p class="big">4 : 6 = 2 : 3</p>'}},
+ {t:"Rasio senilai",h:function(){return '<p>Kalikan kedua angka dengan bilangan sama.</p><div class="row"><span class="lab">2 : 3</span>'+bl(2,"A")+bl(3,"B")+'</div><div class="row"><span class="lab">4 : 6</span>'+bl(4,"A")+bl(6,"B")+'</div><div class="row"><span class="lab">6 : 9</span>'+bl(6,"A")+bl(9,"B")+'</div><p class="big">2 : 3 = 4 : 6 = 6 : 9</p><p>Isinya terlihat beda. Perbandingannya sama.</p>'}},
+ {t:"Mencari bilangan yang hilang",h:function(){return '<p>Soal: 2 : 3 = 10 : ?</p><p><b>Langkah 1.</b> 2 menjadi 10. Dikali 5.</p><p><b>Langkah 2.</b> 3 juga dikali 5.</p><p class="big">3 × 5 = 15</p><p>Jadi 2 : 3 = 10 : 15.</p><p>Sekarang kamu siap mencoba sendiri di menu berikutnya! 👈</p>'}}
+];
+var si=0;
+function drawStep(){
+ $("stp").textContent="Langkah "+(si+1)+" dari "+steps.length+": "+steps[si].t;
+ $("stbody").innerHTML=steps[si].h();
+ $("prev").disabled=si===0;
+ $("next").disabled=si===steps.length-1;
+}
+function stepMove(d){si=Math.max(0,Math.min(steps.length-1,si+d));drawStep()}
+
+/* Visualisasi interaktif */
+function draw(){
+ var a=+$("rs").value,b=+$("ra").value,g=gcd(a,b);
+ $("vs").textContent=a;$("va").textContent=b;
+ $("rowS").innerHTML=bl(a,"A");
+ $("rowA").innerHTML=bl(b,"B");
+ $("out1").textContent="Sirup : Air = "+a+" : "+b;
+ $("out2").textContent=g>1?"Bentuk sederhana: "+(a/g)+" : "+(b/g)+" (dibagi "+g+")":"Sudah paling sederhana.";
+ $("out3").textContent="Setiap 1 sirup, ada "+(Math.round(b/a*100)/100).toString().replace(".",",")+" air.";
+}
+function simp(){var a=+$("rs").value,b=+$("ra").value,g=gcd(a,b);$("rs").value=a/g;$("ra").value=b/g;draw()}
+function dbl(){var a=+$("rs").value*2,b=+$("ra").value*2;if(a>12||b>12){$("out3").textContent="Terlalu besar. Kecilkan dulu slider-nya.";return}$("rs").value=a;$("ra").value=b;draw()}
+$("rs").oninput=draw;$("ra").oninput=draw;
+
+/* Diagram contoh soal */
+$("d1").innerHTML='<span class="lab">Putri</span>'+bl(2,"A","6")+'<br><span class="lab">Putra</span>'+bl(3,"B","6");
+$("d2").innerHTML='<span class="lab">Susu</span>'+bl(3,"A","3")+'<br><span class="lab">Cokelat</span>'+bl(2,"B","3");
+$("d3").innerHTML='<span class="lab">Rani</span>'+bl(2,"A","5rb")+'<br><span class="lab">Dika</span>'+bl(3,"B","5rb");
+
+drawStep();draw();go("s1");
+</script>
+</body>
+</html>
